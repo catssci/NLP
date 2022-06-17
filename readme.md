@@ -8,8 +8,12 @@
 ## 01. RNN
 ## 02. LSTM
 ## 03. GRU
-## 04. Transformer
-## 05. Bert
+## 04. Word2Vec
+## 05. Glove
+## 06. Transformer
+## 07. Bert
+## 08. ELMo
 
 # NLP 응용
+## 
 ## --. 챗봇
