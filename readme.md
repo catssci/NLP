@@ -5,6 +5,7 @@
 ![image](https://user-images.githubusercontent.com/75521926/174091294-992e832b-0a5c-4c5e-abbb-638b80dbe3c1.png)
   출처: https://medium.com/@antoine.louis/a-brief-history-of-natural-language-processing-part-1-ffbcb937ebce
 # 참고 도서
+- [한국어 임베딩](http://www.yes24.com/Product/Goods/78569687)
 - [자연여 처리의 정석](http://www.yes24.com/Product/Goods/109321603)
 # NLP tech
 ## 01. RNN
