@@ -26,3 +26,7 @@
 docker pull ratsgo/embedding-gpu
 docker run -it --rm --runtime=nvidia ratsgo/embedding-gpu bash
 ```
+```
+docker pull ratsgo/embedding-cpu
+docker run -it --rm ratsgo/embedding-cpu bash
+```
