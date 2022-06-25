@@ -20,3 +20,9 @@
 - 행렬 분해 모델
 - 예측 기반 방법
 - 토픽 기반 방법
+
+### 개발 환경
+```
+docker pull ratsgo/embedding-gpu
+docker run -it --rm --runtime=nvidia ratsgo/embedding-gpu bash
+```
