@@ -21,6 +21,11 @@
 - 예측 기반 방법
 - 토픽 기반 방법
 
+### 임베딩 벡터의 의미 함축 분류
+- Bag of Words
+- Language Model
+- Distributional Hypothesis
+
 ### 개발 환경
 ```
 docker pull ratsgo/embedding-gpu
