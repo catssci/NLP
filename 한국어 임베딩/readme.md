@@ -28,10 +28,12 @@
 
 ### 개발 환경
 ```
+# gpu version
 docker pull ratsgo/embedding-gpu
-docker run -it --rm --runtime=nvidia ratsgo/embedding-gpu bash
+docker run -it --runtime=nvidia ratsgo/embedding-gpu bash
 ```
 ```
+# cpu version
 docker pull ratsgo/embedding-cpu
-docker run -it --rm ratsgo/embedding-cpu bash
+docker run -it ratsgo/embedding-cpu bash
 ```
