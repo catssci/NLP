@@ -9,4 +9,5 @@ Neural Probabilistic Language Model를 살펴보자. 선구자적 모델로 2003
 - 단어/문장 간 유사도를 계산 X
 
 ## 모델
-https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/29/NNLM/
+![image](https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/29/NNLM/)
+
