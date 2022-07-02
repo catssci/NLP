@@ -8,3 +8,5 @@ Neural Probabilistic Language Model를 살펴보자. 선구자적 모델로 2003
 - 문장의 Long-Term dependency를 포착하기 어려움 (n-gram에서 n 값의 크기를 5이상 키우기 어려움)
 - 단어/문장 간 유사도를 계산 X
 
+## 모델
+https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/29/NNLM/
