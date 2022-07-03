@@ -18,3 +18,6 @@ Neural Probabilistic Language Model를 살펴보자. 선구자적 모델로 2003
 
 ## 수식
 y_w_t = b + Wx + Utanh(d + Hx)
+
+## 코드
+https://kthworks.github.io/nlp/Neural-Probabilistic-Language-Model-(NPLM)-Pytorch%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/
