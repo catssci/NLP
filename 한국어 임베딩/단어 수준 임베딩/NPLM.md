@@ -13,15 +13,16 @@ Neural Probabilistic Language Model를 살펴보자. 선구자적 모델로 2003
 
 ## 학습 과정
 - 다음 단어가 무엇인지 맞추는 과정에서 학습한다.
-- 네트우크의 출력 (softmax)  
+- 네트워크의 출력 (softmax)  
+
   $P(w_t|w_t-1, ..., w_t-n+1) = exp(y_w_t) / sum(exp(y_t))$
 - n-gram 언어 모델에서 w_t-1, ..., w_t-n+1 단어들을 입력으로 받았을 때, w_t의 확률을 계산한다.
 - y_i는 y_w_t의 원소
 
 ## y_w_t 계산
-x = [C(w_t-1), C(w_t-2), ..., C(w_t-n+1)]
-x: (n-1) * m
-y_w_t = b + Wx + Utanh(d + Hx)
+x = [C(w_t-1), C(w_t-2), ..., C(w_t-n+1)]  
+x: (n-1) * m  
+y_w_t = b + Wx + Utanh(d + Hx)  
 y_w_t: |V|
 
 ## 코드
