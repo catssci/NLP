@@ -14,19 +14,20 @@ Neural Probabilistic Language Model를 살펴보자. NPLM은 선구자적 모델
 ## 학습 과정
 - 다음 단어를 예측하는 과정에서 학습한다.
 
-- 네트워크의 출력은 각 단어의 출현 확률 $$$&y_t&$  $dd$
+- 네트워크의 출력은 각 단어의 출현 확률 $y$로 표현된다. 이때 $y$는 단어 $V$ 크기의 벡터로 단어들의 예측 확률 값을 표현한다. 즉, 목표 단어 $w_t$의 확률을 크게 되도록 예측한다.
 
-  $P(w_t|w_t-1, ..., w_t-n+1) = exp(y_w_t) / sum(exp(y_t))$
+  ​																$P(w_t|w_{t-1}, ..., w_{t-n+1}) = \frac{exp(y_{w_t})}{sum(exp(y_t))}$
 
-- n-gram 언어 모델에서 w_t-1, ..., w_t-n+1 단어들을 입력으로 받았을 때, w_t의 확률을 계산한다.
+- $y_i$는 $y_{w_t}$의 원소
 
-- y_i는 y_w_t의 원소
+- $y_{w_t}$ 계산
 
-## y_w_t 계산
-x = [C(w_t-1), C(w_t-2), ..., C(w_t-n+1)]  
-x: (n-1) * m  
-y_w_t = b + Wx + Utanh(d + Hx)  
-y_w_t: |V|
+  - $x = [C(w_{t-1}), C(w_{t-2}), ..., C(w_{t-n+1})]$
+  - $C(w_{t-1})$는 Embedding 과정을 거친 크기 $m$인 벡터
+  - $x \ shape: (n-1) * m$
+  - $y_{w_t} = b + Wx + Utanh(d + Hx)$
+  - $y_{w_t} \ shape: |V| \ vector$
+
 
 ## 코드
 https://kthworks.github.io/nlp/Neural-Probabilistic-Language-Model-(NPLM)-Pytorch%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/
