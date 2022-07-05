@@ -30,4 +30,4 @@ Neural Probabilistic Language Model를 살펴보자. NPLM은 선구자적 모델
 
 
 ## 코드
-https://kthworks.github.io/nlp/Neural-Probabilistic-Language-Model-(NPLM)-Pytorch%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/
+ [NPLM.py](..\..\..\TIL\word embedding\NPLM.py) 
