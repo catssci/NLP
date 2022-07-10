@@ -1,6 +1,8 @@
 from transformers import BertTokenizer
 import pandas as pd
 from keras_preprocessing.sequence import pad_sequences
+from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
+import torch
 # import urllib.request
 
 # urllib.request.urlretrieve("https://raw.githubusercontent.com/e9t/nsmc/master/ratings_train.txt", filename="ratings_train.txt")
@@ -28,3 +30,38 @@ print(input_ids[:3])
 
 print(input_id.shape)
 print(input_id[:3])
+
+attention_masks = []
+for seq in input_id:
+    seq_mask = [float(i > 0) for i in seq]
+    attention_masks.append(seq_mask)
+print(attention_masks[:3])
+
+data = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor(train_data['label'].values))
+data_seq = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor([-1] * len(train_data)))
+
+# RandomSampler: shuffle, SequentialSampler: No-Shuffle
+sampler = RandomSampler(data)
+seq_sampler = SequentialSampler(data_seq)
+data_loader = DataLoader(data, sampler = sampler, batch_size = 3)
+data_loader_seq = DataLoader(data_seq, sampler = seq_sampler, batch_size = 3)
+
+for i, b in enumerate(data_loader):
+    if i == 1:
+        break
+    x = b[0]
+    y = b[1]
+    z = b[2]
+    print(x)
+    print(y)
+    print(z)
+
+for i, b in enumerate(data_loader_seq):
+    if i == 1:
+        break
+    x = b[0]
+    y = b[1]
+    z = b[2]
+    print(x)
+    print(y)
+    print(z)
