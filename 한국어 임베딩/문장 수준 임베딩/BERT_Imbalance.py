@@ -1,8 +1,11 @@
 from transformers import BertTokenizer
 import pandas as pd
 from keras_preprocessing.sequence import pad_sequences
-from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
+from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler, WeightedRandomSampler
 import torch
+from torchsampler import ImbalancedDatasetSampler
+from collections import Counter
+import numpy as np
 # import urllib.request
 
 # urllib.request.urlretrieve("https://raw.githubusercontent.com/e9t/nsmc/master/ratings_train.txt", filename="ratings_train.txt")
@@ -14,10 +17,23 @@ test_data = pd.read_table('ratings_test.txt')
 print(train_data.shape)
 print(train_data.groupby('label').count())
 
+data_im = train_data.loc[train_data['label'] == 0]
+data_im = pd.concat([data_im, train_data.loc[train_data['label'] == 1][:30]])
+print(data_im.shape)
+print(data_im.groupby('label').count())
+
+count = Counter(data_im['label'].values)
+
+class_count = np.array([count[0], count[1]])
+
+print(class_count)
+
+weight = 1. / class_count
+
 # bert tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased', do_lower_case = False)
 
-data = train_data['document'].values
+data = data_im['document'].values
 documents = ["[CLS] " + str(d) + " [SEP]" for d in data]
 tokenized_doc = [tokenizer.tokenize(s) for s in documents]
 
@@ -40,8 +56,8 @@ for seq in input_id:
     attention_masks.append(seq_mask)
 print(attention_masks[:3])
 
-data = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor(train_data['label'].values))
-data_seq = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor([-1] * len(train_data)))
+data = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor(data_im['label'].values))
+data_seq = TensorDataset(torch.tensor(input_id), torch.tensor(attention_masks), torch.tensor([-1] * len(data_im)))
 
 # RandomSampler: shuffle, SequentialSampler: No-Shuffle
 sampler = RandomSampler(data)
@@ -49,22 +65,13 @@ seq_sampler = SequentialSampler(data_seq)
 data_loader = DataLoader(data, sampler = sampler, batch_size = 3)
 data_loader_seq = DataLoader(data_seq, sampler = seq_sampler, batch_size = 3)
 
-for i, b in enumerate(data_loader):
-    if i == 1:
-        break
-    x = b[0]
-    y = b[1]
-    z = b[2]
-    print(x)
-    print(y)
-    print(z)
+samples_weight = np.array([weight[t] for t in data_im['label'].values])
+samples_weight=torch.from_numpy(samples_weight)
 
-for i, b in enumerate(data_loader_seq):
-    if i == 1:
-        break
-    x = b[0]
-    y = b[1]
-    z = b[2]
-    print(x)
-    print(y)
-    print(z)
+sampler_imbalance = WeightedRandomSampler(samples_weight, len(samples_weight))
+data_loader_imbalance = DataLoader(data, sampler = sampler_imbalance, batch_size = 120)
+
+for d in data_loader_imbalance:
+    # print(d[0])
+    # print(d[1])
+    print(d[2].sum() / len(d[2]))
